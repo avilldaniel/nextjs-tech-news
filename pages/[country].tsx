@@ -1,5 +1,4 @@
 import { NextPage, GetStaticPaths, GetStaticProps } from "next";
-import { Props } from "next/script";
 import loadPosts from "../lib/fetch-posts";
 
 const countries = ["us", "gb", "au", "ie", "ca"];
@@ -19,23 +18,39 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const { articles } = await loadPosts(`${params!.country}`); // ! is non-null assertion operator, IDK
-  console.log("articles:", articles);
+  const res = await loadPosts(`${params!.country}`); // ! is non-null assertion operator, IDK
+  const { articles } = await res.json();
   return {
     props: {
-      articles,
+      articles: articles,
     },
   };
 };
 
-const Country: NextPage = ({ articles }: any) => {
+interface Article {
+  source?: any;
+  author?: string;
+  title?: string;
+  description?: string;
+  url?: string;
+  urlToImage?: string;
+  publishedAt?: string;
+  content?: string;
+}
+
+const Country: NextPage = ({ articles }: Article[] | any) => {
   console.log("page articles:", articles);
   return (
     <ul>
-      {/* {posts.map((post: any) => {
-        <li key={post.publishedAt}>{post.title}</li>;
-      })} */}
-      {/* {posts} */}
+      {articles.map((article: Article, key: number) => {
+        return (
+          <li key={key}>
+            {article.source.name}
+            {article.title}
+            {article.description}
+          </li>
+        );
+      })}
     </ul>
   );
 };

@@ -9,10 +9,12 @@ type LayoutProps = {
 const Layout = ({ children }: LayoutProps) => {
   return (
     <>
-      <SelectCountry />
-      <Disclaimer />
-      {children}
-      <Footer />
+      <main className="container">
+        <SelectCountry />
+        <Disclaimer />
+        {children}
+        <Footer />
+      </main>
     </>
   );
 };
