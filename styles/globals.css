@@ -1,7 +1,8 @@
-p {
-  border: 1px solid blue;
+/* p {
   text-align: center;
-}
+
+  border: 1px solid blue;
+} */
 
 span {
   white-space: nowrap;
@@ -24,6 +25,7 @@ span {
 
 .countries {
   padding: 0;
+  padding-bottom: 15px;
   list-style-type: none;
   width: 90%;
   display: flex;
@@ -31,25 +33,69 @@ span {
   font-size: 2rem;
   margin-top: -20px;
 
-  border: 2px dotted purple;
+  /* border: 2px dotted purple; */
+}
+
+summary {
+  font-size: 1rem;
+}
+
+article > a:hover a:active a:focus {
+  text-decoration: overline;
+  font-size: 2rem;
+}
+
+article {
+  font-weight: bold;
+  font-size: 1.2rem;
+  height: 140px;
+  padding-top: 10px;
+}
+
+.content {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.articles > li {
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+
+  /* border: 3px solid black; */
 }
 
 .articles {
-  border: 2px dashed yellow;
-  min-height: 400px;
+  height: 800px;
+  width: 80%;
+  list-style-type: none;
+  display: flex;
+  gap: 1rem;
+  padding: 0;
+
+  /* border: 2px dashed yellow; */
+}
+
+.selectCou {
+  font-size: 1.1rem;
+  align-self: flex-start;
+  margin-left: 40px;
+  font-style: italic;
+
+  /* border: 2px dashed yellow; */
 }
 
 .container {
-  height: 900px;
-  min-width: 800px;
-  max-width: 1200px;
+  height: 1200px;
+  width: 1200px;
   margin: 40px;
   padding: 15px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  border: 3px solid red;
+  /* border: 3px solid red; */
 }
 
 html,
@@ -68,6 +114,11 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  text-decoration-color: #a63a50;
 }
 
 * {

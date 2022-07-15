@@ -5,10 +5,13 @@ import { countries } from "../pages/[country]";
 const SelectCountry = () => {
   const router = useRouter();
   const currentRoute = router.asPath;
-  // console.log(currentRoute);
+  // console.log("asPath:", currentRoute);
+  // console.log("query:", router.query);
+  // console.log("basePath:", router.basePath);
+  // console.log("pathname:", router.pathname);
   return (
     <>
-      <p>Select a country:</p>
+      <p className="selectCou">Select a country:</p>
       <ul className="countries">
         {countries.map((country, key) => {
           return (

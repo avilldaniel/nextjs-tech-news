@@ -1,6 +1,8 @@
 import { NextPage, GetStaticPaths, GetStaticProps } from "next";
+import { useRouter } from "next/router";
 import Image from "next/image";
 import loadPosts from "../lib/fetch-posts";
+import noImage from "../public/noImage.png";
 
 export const countries = ["us", "gb", "au", "ie", "ca"];
 const paths = countries.map((country) => {
@@ -40,21 +42,32 @@ interface Article {
 }
 
 const Country: NextPage = ({ articles }: Article[] | any) => {
-  console.log("page articles:", articles);
+  const router = useRouter();
+  // console.log("page articles:", articles);
   return (
     <ul className="articles">
       {articles.map((article: Article, key: number) => {
         return (
           <li key={key}>
-            <Image
-              src={`https://res.cloudinary.com/demo/image/fetch/${article.urlToImage!}`}
-              alt={article.title}
-              width={100}
-              height={100}
-            ></Image>
-            {article.source.name}
-            {article.title}
-            {article.description}
+            <div className="content">
+              <Image
+                src={
+                  article.urlToImage
+                    ? `https://res.cloudinary.com/demo/image/fetch/${article.urlToImage!}`
+                    : noImage
+                }
+                alt={article.title}
+                width={250}
+                height={250}
+              ></Image>
+              <article>
+                <a href={article.url} target="_blank" rel="noreferrer">
+                  {article.title}
+                </a>
+              </article>
+            </div>
+
+            <summary>{article.description}</summary>
           </li>
         );
       })}
