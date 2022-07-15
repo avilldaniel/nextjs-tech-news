@@ -11,8 +11,8 @@ const Layout = ({ children }: LayoutProps) => {
     <>
       <main className="container">
         <SelectCountry />
-        <Disclaimer />
         {children}
+        <Disclaimer />
         <Footer />
       </main>
     </>

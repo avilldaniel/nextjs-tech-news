@@ -1,7 +1,8 @@
 import { NextPage, GetStaticPaths, GetStaticProps } from "next";
+import Image from "next/image";
 import loadPosts from "../lib/fetch-posts";
 
-const countries = ["us", "gb", "au", "ie", "ca"];
+export const countries = ["us", "gb", "au", "ie", "ca"];
 const paths = countries.map((country) => {
   return {
     params: {
@@ -41,10 +42,16 @@ interface Article {
 const Country: NextPage = ({ articles }: Article[] | any) => {
   console.log("page articles:", articles);
   return (
-    <ul>
+    <ul className="articles">
       {articles.map((article: Article, key: number) => {
         return (
           <li key={key}>
+            <Image
+              src={`https://res.cloudinary.com/demo/image/fetch/${article.urlToImage!}`}
+              alt={article.title}
+              width={100}
+              height={100}
+            ></Image>
             {article.source.name}
             {article.title}
             {article.description}

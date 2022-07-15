@@ -1,36 +1,38 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { countries } from "../pages/[country]";
 
 const SelectCountry = () => {
+  const router = useRouter();
+  const currentRoute = router.asPath;
+  // console.log(currentRoute);
   return (
     <>
-      {/* <div className="selectCountry"></div> */}
       <p>Select a country:</p>
       <ul className="countries">
-        <li>
-          <Link href="/us">
-            <a>U.S.A</a>
-          </Link>
-        </li>
-        <li>
-          <Link href="/gb">
-            <a>U.K.</a>
-          </Link>
-        </li>
-        <li>
-          <Link href="/au">
-            <a>Australia</a>
-          </Link>
-        </li>
-        <li>
-          <Link href="/ie">
-            <a>Ireland</a>
-          </Link>
-        </li>
-        <li>
-          <Link href="/ca">
-            <a>Canada</a>
-          </Link>
-        </li>
+        {countries.map((country, key) => {
+          return (
+            <li key={key}>
+              <Link href={country}>
+                <a
+                  className={
+                    currentRoute == "".concat("/", country) ? "activeLink" : ""
+                  }
+                >
+                  {country == "us"
+                    ? "U.S.A."
+                    : country == "gb"
+                    ? "U.K."
+                    : country == "au"
+                    ? "Australia"
+                    : country == "ie"
+                    ? "Ireland"
+                    : "Canada"}
+                </a>
+              </Link>
+            </li>
+          );
+        })}
       </ul>
     </>
   );
