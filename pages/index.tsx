@@ -8,7 +8,6 @@ const Home: NextPage = () => {
       <Head>
         <title>Tech Globe</title>
       </Head>
-      home content
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import { NextPage, GetStaticPaths, GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import Head from "next/head";
 import loadPosts from "../lib/fetch-posts";
 import noImage from "../public/noImage.png";
 
@@ -27,6 +28,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     props: {
       articles: articles,
     },
+    revalidate: 1800, // re-generate every 30min
   };
 };
 
@@ -43,35 +45,42 @@ interface Article {
 
 const Country: NextPage = ({ articles }: Article[] | any) => {
   const router = useRouter();
+  const { country } = router.query;
+  // console.log(post);
   // console.log("page articles:", articles);
   return (
-    <ul className="articles">
-      {articles.map((article: Article, key: number) => {
-        return (
-          <li key={key}>
-            <div className="content">
-              <Image
-                src={
-                  article.urlToImage
-                    ? `https://res.cloudinary.com/demo/image/fetch/${article.urlToImage!}`
-                    : noImage
-                }
-                alt={article.title}
-                width={250}
-                height={250}
-              ></Image>
-              <article>
-                <a href={article.url} target="_blank" rel="noreferrer">
-                  {article.title}
-                </a>
-              </article>
-            </div>
+    <>
+      <Head>
+        <title>{country?.toString().toUpperCase()} - Tech Globe</title>
+      </Head>
+      <ul className="articles">
+        {articles.map((article: Article, key: number) => {
+          return (
+            <li key={key}>
+              <div className="content">
+                <Image
+                  src={
+                    article.urlToImage
+                      ? `https://res.cloudinary.com/demo/image/fetch/${article.urlToImage!}`
+                      : noImage
+                  }
+                  alt={article.title}
+                  width={250}
+                  height={250}
+                ></Image>
+                <article>
+                  <a href={article.url} target="_blank" rel="noreferrer">
+                    {article.title}
+                  </a>
+                </article>
+              </div>
 
-            <summary>{article.description}</summary>
-          </li>
-        );
-      })}
-    </ul>
+              <summary>{article.description}</summary>
+            </li>
+          );
+        })}
+      </ul>
+    </>
   );
 };
 
