@@ -28,7 +28,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     props: {
       articles: articles,
     },
-    revalidate: 1800, // re-generate every 30min
+    revalidate: 10, // re-generate every 10sec
   };
 };
 
