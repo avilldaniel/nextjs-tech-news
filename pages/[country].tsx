@@ -22,13 +22,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
+  console.log("testing 30 sec revalidation");
   const res = await loadPosts(`${params!.country}`); // ! is non-null assertion operator, IDK
   const { articles } = await res.json();
   return {
     props: {
       articles: articles,
     },
-    revalidate: 10, // re-generate every 10sec
+    revalidate: 30, // re-generate every 30sec
   };
 };
 
